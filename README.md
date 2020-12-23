@@ -1,2 +1,2 @@
 # File-Station
-Implement the file station based on postgresql and NAS
+Implement the image database with postgresql and NAS
