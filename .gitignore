@@ -146,6 +146,7 @@ dmypy.json
 *.mp4
 *.pkl
 *.ini
+*.xml
 pic/
 /.project
 

@@ -42,8 +42,8 @@ class Dataset_Download(SQL_Config):
         return image_df
     
     def download_image(self, dataset_df, image_df): 
-        path = dataset_df.set_index('Name').loc['VOC2007', 'Prefix_Path']
-        img_files = image_df.set_index('Dataset').loc['VOC2007', 'File_Name']
+        path = dataset_df.set_index('Name').loc[self.dataset_name, 'Prefix_Path']
+        img_files = image_df.set_index('Dataset').loc[self.dataset_name, 'File_Name']
         dst_dir = self.saved_path + 'image/' + self.dataset_name
         print('Start download image...')
         

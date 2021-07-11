@@ -41,10 +41,11 @@ class VOC_Dataset(Image_Dataset2DB):
         for file in tqdm(file_list, ncols=60):
             tree = XET.parse(path + file)
             root = tree.getroot()
-            
             dataset = root.findall('folder')[0].text
-            assert(self.dataset_name == dataset)
-            
+
+            if self.dataset_name != dataset:
+                continue
+        
             file_name = root.findall('filename')[0].text
             size = root.findall('size')[0]
         
@@ -69,9 +70,14 @@ class VOC_Dataset(Image_Dataset2DB):
         for obj in objects:
             name = obj.find('name').text
             pose = obj.find('pose').text
-            truncated = obj.find('truncated').text
-            difficult = obj.find('difficult').text
-        
+
+            try:
+                truncated = obj.find('truncated').text
+                difficult = obj.find('difficult').text
+            except:
+                truncated = 0
+                difficult = 0
+            
             bndbox = obj.find('bndbox')
             xmin = int(bndbox[0].text)
             ymin = int(bndbox[1].text)
